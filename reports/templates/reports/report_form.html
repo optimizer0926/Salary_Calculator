@@ -1,0 +1,20 @@
+{% extends 'form.html' %}
+{% load i18n %}
+
+{% block nav-reports %}
+<li class="sub-menu">
+    <a href="{% url 'report-list' %}" class="active">
+    <i class="fa fa-file-o"></i>
+    <span>{% trans 'Отчеты' %}</span>
+    </a>
+</li>
+{% endblock %}
+
+{% block title %}
+<h3><i class="fa fa-file-o"></i> <a href="{% url 'report-list' %}">{% trans 'Отчеты' %}</a> <i class="fa fa-angle-right"></i> {{ view.report_title }}</h3>
+{% endblock %}
+{% block buttons %}
+    <button type="submit" class="btn btn-primary">
+        {% trans 'Экспортировать в Excel' %}
+    </button>
+{% endblock %}

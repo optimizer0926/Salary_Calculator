@@ -1,0 +1,15 @@
+{% extends 'confirm.html' %}
+{% load i18n %}
+
+{% block nav-departments %}
+<li class="sub-menu">
+    <a href="{% url 'department-list' %}" class="active">
+    <i class="fa fa-users"></i>
+    <span>{% trans 'Отделы' %}</span>
+    </a>
+</li>
+{% endblock %}
+
+{% block title %}
+    <h3><i class="fa fa-user"></i> {% trans 'Удалить' %} {{ object }}?</h3>
+{% endblock %}

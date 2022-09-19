@@ -1,0 +1,26 @@
+{% extends 'form.html' %}
+{% load i18n %}
+
+{% block nav-positions %}
+<li class="sub-menu">
+    <a href="{% url 'position-list' %}" class="active">
+    <i class="fa fa-star"></i>
+    <span>{% trans 'Должности' %}</span>
+    </a>
+</li>
+{% endblock %}
+
+{% block title %}
+{% if form.instance.pk %}
+<h3><i class="fa fa-star"></i> {{ form.instance.name }}</h3>
+{% else %}
+<h3><i class="fa fa-star"></i> {% trans 'Новая должность' %}</h3>
+{% endif %}
+{% endblock %}
+
+{% block buttons %}
+{{ block.super }}
+{% if object.pk %}
+<a class="btn btn-danger" href="{% url 'position-delete' object.pk %}">{% trans 'Удалить' %}</a>
+{% endif %}
+{% endblock %}

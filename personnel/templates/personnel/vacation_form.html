@@ -1,0 +1,26 @@
+{% extends 'form.html' %}
+{% load i18n %}
+
+{% block nav-vacations %}
+<li class="sub-menu">
+    <a href="{% url 'vacation-list' %}" class="active">
+    <i class="fa fa-car"></i>
+    <span>{% trans 'Отпуска' %}</span>
+    </a>
+</li>
+{% endblock %}
+
+{% block title %}
+{% if form.instance.pk %}
+<h3><i class="fa fa-car"></i> {{ form.instance }}</h3>
+{% else %}
+<h3><i class="fa fa-car"></i> {% trans 'Новый отпуск' %}</h3>
+{% endif %}
+{% endblock %}
+
+{% block buttons %}
+{{ block.super }}
+{% if object.pk %}
+<a class="btn btn-danger" href="{% url 'vacation-delete' object.pk %}">{% trans 'Удалить' %}</a>
+{% endif %}
+{% endblock %}

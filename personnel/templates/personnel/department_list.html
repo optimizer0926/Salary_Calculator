@@ -1,0 +1,41 @@
+{% extends 'list.html' %}
+{% load i18n %}
+
+{% block nav-departments %}
+<li class="sub-menu">
+    <a href="{% url 'department-list' %}" class="active">
+    <i class="fa fa-users"></i>
+    <span>{% trans 'Отделы' %}</span>
+    </a>
+</li>
+{% endblock %}
+
+{% block title %}
+    <h3><i class="fa fa-users"></i> {% trans 'Список отделов' %}</h3>
+{% endblock %}
+
+{% block items %}
+{% for object in object_list %}
+    <li>
+        <div class="task-title">
+            <span class="task-title-sp"><a href="{% url 'employee-list' object.pk %}">{{ object }}</a></span>
+            <div class="pull-right hidden-phone">
+                <a class="btn btn-primary btn-xs" href="{% url 'department-update' object.pk %}"><i class="fa fa-pencil"></i></a>
+                <a class="btn btn-danger btn-xs" href="{% url 'department-delete' object.pk %}"><i class="fa fa-trash-o"></i></a>
+            </div>
+        </div>
+    </li>
+{% endfor %}
+{% endblock %}
+
+{% block content-footer %}
+{% if not object_list %}
+<div class="alert alert-warning">
+    {% trans 'Не найдено ни одного отдела' %}
+</div>
+{% endif %}
+{% endblock %}
+
+{% block add-button %}
+    <a class="btn btn-success btn-sm pull-left" href="{% url 'department-create' %}"> {% trans 'Добавить отдел' %}</a>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'table.html' %}
+{% load i18n %}
+
+{% block nav-departments %}
+<li class="sub-menu">
+    <a href="{% url 'department-list' %}" class="active">
+    <i class="fa fa-users"></i>
+    <span>{% trans 'Отделы' %}</span>
+    </a>
+</li>
+{% endblock %}
+
+{% block title %}
+<h3><i class="fa fa-users"></i> {{ department }}</h3>
+{% endblock %}
+
+{% block table-head %}
+<th><i class="fa fa-user"></i> {% trans 'Фамилия, Имя, Отчество' %}</th>
+<th><i class="fa fa-star"></i> {% trans 'Должность' %}</th>
+<th><i class="fa fa-usd"></i> {% trans 'Оклад' %}</th>
+<th><i class="fa fa-plus"></i> {% trans 'Постоянная премия' %}</th>
+<th></th>
+{% endblock %}
+
+{% block table-body %}
+{% for employee in object_list %}
+<tr>
+    <td>{{ employee }}</td>
+    {% if employee.position.active %}
+    <td>{{ employee.position }}</td>
+    {% else %}
+    <td><strike>{{ employee.position }}</strike></td>
+    {% endif %}
+    <td>{{ employee.position.wages }}</td>
+    <td>{{ employee.permanent_bonus_amount }}</td>
+    <td>
+        <a class="btn btn-primary btn-xs" href="{% url 'employee-update' employee.pk %}"><i class="fa fa-pencil"></i></a>
+        <a class="btn btn-danger btn-xs" href="{% url 'employee-delete' employee.pk %}"><i class="fa fa-trash-o "></i></a>
+    </td>
+</tr>
+{% endfor %}
+{% endblock %}
+
+{% block content-footer %}
+{% if not object_list %}
+<div class="alert alert-warning">
+    {% trans 'В данном отделе пока еще нет сотрудников' %}
+</div>
+{% endif %}
+{% endblock %}
+
+{% block buttons %}
+<a class="btn btn-success btn-primary" href="{% url 'employee-create' view.kwargs.department_id %}"> {% trans 'Добавить сотрудника' %}</a>
+{% endblock %}

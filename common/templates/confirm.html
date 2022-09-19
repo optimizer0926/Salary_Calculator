@@ -1,0 +1,18 @@
+{% extends 'blank.html' %}
+{% load i18n %}
+
+{% block content %}
+<section class="wrapper site-min-height">
+    {% block title %}
+    <h3><i class="fa fa-angle-right"></i> {% trans 'Удалить' %} {{ object }}?</h3>
+    {% endblock %}
+    <div class="row mt">
+        <div class="col-lg-12">
+            <form action="" method="post">
+                {% csrf_token %}
+                <input class="btn btn-primary" type="submit" value="{% trans 'Подтвердить' %}" />
+            </form>
+        </div>
+    </div>
+</section><! --/wrapper -->
+{% endblock %}

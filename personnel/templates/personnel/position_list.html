@@ -1,0 +1,46 @@
+{% extends 'table.html' %}
+{% load i18n %}
+
+{% block nav-positions %}
+<li class="sub-menu">
+    <a href="{% url 'position-list' %}" class="active">
+    <i class="fa fa-star"></i>
+    <span>{% trans 'Должности' %}</span>
+    </a>
+</li>
+{% endblock %}
+
+{% block title %}
+    <h3><i class="fa fa-star"></i> {% trans 'Должности' %}</h3>
+{% endblock %}
+
+{% block table-head %}
+<th><i class="fa fa-star"></i> {% trans 'Название' %}</th>
+<th><i class="fa fa-usd"></i> {% trans 'Ставка' %}</th>
+<th></th>
+{% endblock %}
+
+{% block table-body %}
+{% for position in object_list %}
+<tr>
+    <td>{{ position }}</td>
+    <td>{{ position.wages }}</td>
+    <td>
+        <a class="btn btn-primary btn-xs" href="{% url 'position-update' position.pk %}"><i class="fa fa-pencil"></i></a>
+        <a class="btn btn-danger btn-xs" href="{% url 'position-delete' position.pk %}"><i class="fa fa-trash-o "></i></a>
+    </td>
+</tr>
+{% endfor %}
+{% endblock %}
+
+{% block content-footer %}
+{% if not object_list %}
+<div class="alert alert-warning">
+    {% trans 'Не найдено ни одной должности' %}
+</div>
+{% endif %}
+{% endblock %}
+
+{% block buttons %}
+    <a class="btn btn-success btn-sm pull-left" href="{% url 'position-create' %}"> {% trans 'Добавить должность' %}</a>
+{% endblock %}

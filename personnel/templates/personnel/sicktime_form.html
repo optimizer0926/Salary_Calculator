@@ -1,0 +1,26 @@
+{% extends 'form.html' %}
+{% load i18n %}
+
+{% block nav-sicktimes %}
+<li class="sub-menu">
+    <a href="{% url 'sicktime-list' %}" class="active">
+    <i class="fa fa-heart"></i>
+    <span>{% trans 'Больничные' %}</span>
+    </a>
+</li>
+{% endblock %}
+
+{% block title %}
+{% if form.instance.pk %}
+<h3><i class="fa fa-heart"></i> {{ form.instance }}</h3>
+{% else %}
+<h3><i class="fa fa-heart"></i> {% trans 'Новый больничный' %}</h3>
+{% endif %}
+{% endblock %}
+
+{% block buttons %}
+{{ block.super }}
+{% if object.pk %}
+<a class="btn btn-danger" href="{% url 'sicktime-delete' object.pk %}">{% trans 'Удалить' %}</a>
+{% endif %}
+{% endblock %}

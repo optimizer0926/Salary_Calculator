@@ -1,0 +1,62 @@
+{% extends 'blank.html' %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+{% load i18n %}
+
+{% block css %}
+{{ block.super }}
+{{ form.media.css }}
+{% endblock %}
+
+
+{% block content %}
+<section class="wrapper site-min-height">
+    {% block title %}
+    {% if form.instance.pk %}
+    <h3><i class="fa fa-users"></i> {{ form.instance.name }}</h3>
+    {% else %}
+    <h3><i class="fa fa-users"></i> {% trans 'Новый' %}</h3>
+    {% endif %}
+    {% endblock %}
+    <div class="row mt">
+        <div class="col-lg-12">
+            <div class="form-panel">
+                <form method="post" class="form-horizontal style-form">
+                    {% csrf_token %}
+                    {% for field in form %}
+                    {% if field.errors %}
+                    <div class="form-group has-error">
+                    {% else %}
+                    <div class="form-group">
+                    {% endif %}
+                        <label class="col-sm-2 col-sm-2 control-label">{{ field.label }}</label>
+                        <div class="col-sm-10">
+                            {{ field|add_class:"form-control"}}
+                            <span class class="help-block">{{ field.help_text }}</span>
+                            {% if field.errors %}
+                            <span class="help-block">
+                            {% for error in field.errors %}
+                                {{ error }}
+                            {% endfor %}
+                            </span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% block buttons %}
+                    <button type="submit" class="btn btn-primary">
+                        {% trans 'Сохранить' %}
+                    </button>
+                    {% endblock %}
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block js %}
+    {{ block.super }}
+    {{ form.media.js }}
+{% endblock %}
+

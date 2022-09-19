@@ -1,0 +1,41 @@
+{% extends 'form.html' %}
+{% load i18n %}
+
+{% block nav-bonuses %}
+<li class="sub-menu">
+    <a href="{% url 'bonus-list' %}" class="active">
+    <i class="fa fa-usd"></i>
+    <span>{% trans 'Премии' %}</span>
+    </a>
+</li>
+{% endblock %}
+
+{% block title %}
+{% if form.instance.pk %}
+<h3><i class="fa fa-usd"></i> {{ form.instance }}</h3>
+{% else %}
+<h3><i class="fa fa-usd"></i> {% trans 'Новая премия' %}</h3>
+{% endif %}
+{% endblock %}
+
+{% block buttons %}
+{{ block.super }}
+{% if object.pk %}
+<a class="btn btn-danger" href="{% url 'bonus-delete' object.pk %}">{% trans 'Удалить' %}</a>
+{% endif %}
+{% endblock %}
+
+{% block js %}
+{{ block.super }}
+<script>
+    var wages = parseFloat({{ form.instance.employee.wages }});
+    $("#id_percent").on("change keyup", function(evt) {
+        var amount = (parseFloat($(this).val()) * wages) / 100.0;
+        $("#id_amount").val(amount.toFixed(2));
+    });
+    $("#id_amount").on("change keyup", function(evt) {
+        var percent = (parseFloat($(this).val()) * 100.0) / wages;
+        $("#id_percent").val(percent);
+    });
+</script>
+{% endblock %}

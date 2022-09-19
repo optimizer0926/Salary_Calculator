@@ -1,0 +1,9 @@
+Babel
+Django
+django-extensions
+django-widget-tweaks
+pytz
+six
+Werkzeug
+XlsxWriter
+simplejson

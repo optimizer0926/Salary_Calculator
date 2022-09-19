@@ -1,0 +1,43 @@
+{% extends 'list.html' %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block css %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/bootstrap-datepicker3.min.css' %}" />
+{% endblock %}
+
+{% block nav-reports %}
+<li class="sub-menu">
+    <a href="{% url 'report-list' %}" class="active">
+    <i class="fa fa-file-o"></i>
+    <span>{% trans 'Отчеты' %}</span>
+    </a>
+</li>
+{% endblock %}
+
+{% block title %}
+<h3>
+    <i class="fa fa-file-o"></i> {% trans 'Отчеты' %}
+</h3>
+{% endblock %}
+
+{% block items %}
+{% for object in object_list %}
+    <li>
+        <div class="task-title">
+            <span class="task-title-sp"><a href="{{ object.url }}">{{ object.name }}</a></span>
+        </div>
+    </li>
+{% endfor %}
+{% endblock %}
+
+{% block add-button %}
+{% endblock %}
+
+{% block js %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'assets/js/bootstrap-inputmask/bootstrap-inputmask.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'assets/js/bootstrap-datepicker.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'assets/locales/bootstrap-datepicker.ru.min.js' %}"></script>
+{% endblock %}

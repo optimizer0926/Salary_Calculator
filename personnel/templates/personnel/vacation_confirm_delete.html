@@ -1,0 +1,15 @@
+{% extends 'confirm.html' %}
+{% load i18n %}
+
+{% block nav-vacations %}
+<li class="sub-menu">
+    <a href="{% url 'vacation-list' %}" class="active">
+    <i class="fa fa-car"></i>
+    <span>{% trans 'Отпуска' %}</span>
+    </a>
+</li>
+{% endblock %}
+
+{% block title %}
+    <h3><i class="fa fa-car"></i> {% trans 'Удалить' %} {{ object }}?</h3>
+{% endblock %}

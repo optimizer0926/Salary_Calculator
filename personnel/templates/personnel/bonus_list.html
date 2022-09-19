@@ -1,0 +1,54 @@
+{% extends 'table.html' %}
+{% load i18n %}
+
+{% block nav-bonuses %}
+<li class="sub-menu">
+    <a href="{% url 'bonus-list' %}" class="active">
+    <i class="fa fa-usd"></i>
+    <span>{% trans 'Премии' %}</span>
+    </a>
+</li>
+{% endblock %}
+
+{% block title %}
+    <h3><i class="fa fa-usd"></i> {% trans 'Премии' %}</h3>
+{% endblock %}
+
+{% block table-head %}
+<th><i class="fa fa-user"></i> {% trans 'Фамилия, Имя, Отчество' %}</th>
+<th><i class="fa fa-calendar"></i> {% trans 'Месяц' %}</th>
+<th><i class="fa fa-usd"></i> {% trans 'Сумма' %}</th>
+<th></th>
+{% endblock %}
+
+{% block table-body %}
+{% for object in object_list %}
+<tr>
+    {% if object.employee.active %}
+    <td>{{ object.employee }}</td>
+    {% else %}
+    <td><strike>{{ object.employee }}</strike></td>
+    {% endif %}
+    <td>{{ object.formatted_date }}</td>
+    <td>{{ object.amount }}</td>
+    <td>
+        {% if object.employee.active %}
+        <a class="btn btn-primary btn-xs" href="{% url 'bonus-update' object.pk %}"><i class="fa fa-pencil"></i></a>
+        {% endif %}
+        <a class="btn btn-danger btn-xs" href="{% url 'bonus-delete' object.pk %}"><i class="fa fa-trash-o "></i></a>
+    </td>
+</tr>
+{% endfor %}
+{% endblock %}
+
+{% block content-footer %}
+{% if not object_list %}
+<div class="alert alert-warning">
+    {% trans 'Не найдено ни одний премии' %}
+</div>
+{% endif %}
+{% endblock %}
+
+{% block buttons %}
+    <a class="btn btn-success btn-sm pull-left" href="{% url 'bonus-create' %}"> {% trans 'Добавить премию' %}</a>
+{% endblock %}

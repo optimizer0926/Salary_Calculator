@@ -1,0 +1,13 @@
+{% extends 'personnel/vacation_form.html' %}
+
+{% block js %}
+{{ block.super }}
+<script>
+    var employeesAverageDailyEarnings = {{ employees_average_daily_earnings|safe }};
+    $("#id_employee").change(function() {
+        $("#id_average_daily_earnings").val(
+            employeesAverageDailyEarnings[$(this).val()] || ""
+        )
+    });
+</script>
+{% endblock %}

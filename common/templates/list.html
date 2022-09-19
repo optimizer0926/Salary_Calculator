@@ -1,0 +1,50 @@
+{% extends 'blank.html' %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block css %}
+{{ block.super }}
+    <link rel="stylesheet" href="{% static 'assets/css/to-do.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="wrapper">
+    {% block title %}
+    <h3><i class="fa fa-angle-right"></i> ...</h3>
+    {% endblock %}
+
+    <div class="row mt">
+        <div class="col-md-12">
+            <section class="task-panel tasks-widget">
+                <div class="panel-body">
+                    <div class="task-content">
+                        <ul class="task-list">
+                        {% block items %}
+                        {% for item in object_list %}
+                            <li>
+                                <div class="task-title">
+                                    <span class="task-title-sp">{{ item }}</span>
+                                    <div class="pull-right hidden-phone">
+                                        <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+                        {% endblock %}
+                        </ul>
+                        {% block content-footer %}
+                        {% endblock %}
+                    </div>
+
+                    <div class=" add-task-row">
+                    {% block add-button %}
+                        <a class="btn btn-success btn-sm pull-left" href="#"> ...</a>
+                    {% endblock %}
+                    </div>
+                </div>
+            </section>
+        </div><!-- /col-md-12-->
+    </div><!-- /row -->
+</section><! --/wrapper -->
+{% endblock %}
+

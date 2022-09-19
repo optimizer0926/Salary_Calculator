@@ -1,0 +1,13 @@
+{% extends 'personnel/sicktime_form.html' %}
+
+{% block js %}
+{{ block.super }}
+<script>
+    var employeesLastTwoYearsWages = {{ employees_last_two_years_wages|safe }};
+    $("#id_employee").change(function() {
+        $("#id_last_two_years_wages").val(
+            employeesLastTwoYearsWages[$(this).val()] || ""
+        )
+    });
+</script>
+{% endblock %}

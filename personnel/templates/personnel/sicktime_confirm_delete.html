@@ -1,0 +1,15 @@
+{% extends 'confirm.html' %}
+{% load i18n %}
+
+{% block nav-sicktimes %}
+<li class="sub-menu">
+    <a href="{% url 'sicktime-list' %}" class="active">
+    <i class="fa fa-heart"></i>
+    <span>{% trans 'Больничные' %}</span>
+    </a>
+</li>
+{% endblock %}
+
+{% block title %}
+    <h3><i class="fa fa-heart"></i> {% trans 'Удалить' %} {{ object }}?</h3>
+{% endblock %}
